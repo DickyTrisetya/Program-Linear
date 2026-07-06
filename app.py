@@ -56,13 +56,16 @@ tanda_opsi = ["<=", ">=", "="] if metode == "Metode Big M" else ["<="]
 
 def input_kendala(nama, default_a, default_b, default_k, key_prefix):
     st.subheader(nama)
-    c1, c2, c3, c4 = st.columns([1, 1, 1, 1.2]) if metode == "Metode Big M" else st.columns(3)
-    a = c1.number_input("x", value=default_a, step=1.0, key=f"a_{key_prefix}")
-    b = c2.number_input("y", value=default_b, step=1.0, key=f"b_{key_prefix}")
     if metode == "Metode Big M":
+        c1, c2, c3, c4 = st.columns([1, 1, 1, 1.2])
+        a = c1.number_input("x", value=default_a, step=1.0, key=f"a_{key_prefix}")
+        b = c2.number_input("y", value=default_b, step=1.0, key=f"b_{key_prefix}")
         tanda = c3.selectbox("tanda", tanda_opsi, key=f"t_{key_prefix}")
         k = c4.number_input("nilai", value=default_k, step=1.0, key=f"k_{key_prefix}")
     else:
+        c1, c2, c3 = st.columns(3)
+        a = c1.number_input("x", value=default_a, step=1.0, key=f"a_{key_prefix}")
+        b = c2.number_input("y", value=default_b, step=1.0, key=f"b_{key_prefix}")
         tanda = "<="
         k = c3.number_input("<= nilai", value=default_k, step=1.0, key=f"k_{key_prefix}")
     return a, b, tanda, k
